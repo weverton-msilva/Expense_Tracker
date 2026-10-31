@@ -2,6 +2,7 @@ package com.example.expense_tracker.controller;
 
 import com.example.expense_tracker.model.Expense;
 import com.example.expense_tracker.service.ExpenseService;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +40,13 @@ public class ExpenseController {
     }
 
     // Método para procurar despesa pela data
-    @GetMapping("/{date}")
-    public ResponseEntity<List<Expense>> getExpenseByDate(@PathVariable LocalDate date) {
-        List<Expense> expense = expenseService.findByDate(date);
+    @GetMapping("/date/{date}")
+    public ResponseEntity<List<Expense>> getExpenseByDate(
+            @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 
-        return ResponseEntity.ok(expense);
+        List<Expense> expenses = expenseService.findByDate(date);
+
+        return ResponseEntity.ok(expenses);
     }
 
     // Método para guardar ou criar uma despesa
