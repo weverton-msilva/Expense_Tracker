@@ -2,6 +2,7 @@ package com.example.expense_tracker.controller;
 
 import com.example.expense_tracker.model.Expense;
 import com.example.expense_tracker.service.ExpenseService;
+import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ public class ExpenseController {
 
     // Método para guardar ou criar uma despesa
     @PostMapping
-    public ResponseEntity<Expense> saveExpense(@RequestBody Expense expense) {
+    public ResponseEntity<Expense> saveExpense(@Valid @RequestBody Expense expense) {
         Expense savedExpense = expenseService.save(expense);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedExpense);
