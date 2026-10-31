@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class ExpenseController {
 
     // Método para listar todas as despesas
     @GetMapping
-    public ResponseEntity<List<Expense>> getAllExpense() {
+    public ResponseEntity<List<Expense>> getAllExpenses() {
         List<Expense> expenseList = expenseService.findAll();
 
         return ResponseEntity.ok(expenseList);
@@ -35,6 +36,14 @@ public class ExpenseController {
 
         return expense.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Método para procurar despesa pela data
+    @GetMapping("/{date}")
+    public ResponseEntity<List<Expense>> getExpenseByDate(@PathVariable LocalDate date) {
+        List<Expense> expense = expenseService.findByDate(date);
+
+        return ResponseEntity.ok(expense);
     }
 
     // Método para guardar ou criar uma despesa

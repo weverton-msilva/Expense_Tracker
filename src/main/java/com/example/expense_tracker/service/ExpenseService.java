@@ -4,6 +4,7 @@ import com.example.expense_tracker.model.Expense;
 import com.example.expense_tracker.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,11 @@ public class ExpenseService {
     // Procurar despesa por ID
     public Optional<Expense> findById(Long id) {
         return expenseRepository.findById(id);
+    }
+
+    // Procurar despesa por data
+    public List<Expense> findByDate(LocalDate date) {
+        return expenseRepository.findByDate(date);
     }
 
     // Guardar ou atualizar uma despesa
