@@ -7,5 +7,6 @@ public record ExpenseResponseDTO(
         Long id,
         String description,
         BigDecimal amount,
-        LocalDate date
+        LocalDate date,
+        String category
 ) {}

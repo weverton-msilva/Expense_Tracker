@@ -9,13 +9,13 @@
 
 ## ✨ Funcionalidades
 
-- ❌ CRUD completo de gastos (REST)
-- ❌ Filtro por id, categoria, período e valor
+- ✅ CRUD completo de gastos (REST)
+- ✅ Filtro por id, categoria e período
 - ❌ Resumo de gastos agrupados por categoria
 - ❌ Total de gastos no mês atual
 - ❌ Paginação e ordenação nas listagens
 - ❌ Validação de entrada com `Bean Validation`
-- ❌ Tratamento de erros padronizado (`@ControllerAdvice`)
+- ✅ Tratamento de erros padronizado (`@ControllerAdvice`)
 - ❌ Testes com **JUnit 5** + **MockMvc** + **Testcontainers**
 
 ## 🛠️ Stack

@@ -12,4 +12,7 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     // Buscar despesa pela data
     List<Expense> findByDate(LocalDate date);
+
+    // Buscar despesa pela categoria
+    List<Expense> findByCategory(String category);
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ExpenseService {
@@ -28,7 +27,8 @@ public class ExpenseService {
                         expense.getId(),
                         expense.getDescription(),
                         expense.getAmount(),
-                        expense.getDate()
+                        expense.getDate(),
+                        expense.getCategory()
                 )).toList();
     }
     // Procurar despesa por ID
@@ -42,7 +42,8 @@ public class ExpenseService {
                 expense.getId(),
                 expense.getDescription(),
                 expense.getAmount(),
-                expense.getDate()
+                expense.getDate(),
+                expense.getCategory()
         );
     }
 
@@ -53,8 +54,22 @@ public class ExpenseService {
                         expense.getId(),
                         expense.getDescription(),
                         expense.getAmount(),
-                        expense.getDate()
+                        expense.getDate(),
+                        expense.getCategory()
                 )).toList();
+    }
+
+    /// Procurar despesa pela categoria
+    public List<ExpenseResponseDTO> findByCategory(String category) {
+        return expenseRepository.findByCategory(category)
+                .stream().map(expense -> new ExpenseResponseDTO(
+                        expense.getId(),
+                        expense.getDescription(),
+                        expense.getAmount(),
+                        expense.getDate(),
+                        expense.getCategory()
+                ))
+                .toList();
     }
 
     // Guardar ou atualizar uma despesa
@@ -71,7 +86,8 @@ public class ExpenseService {
                 savedExpense.getId(),
                 savedExpense.getDescription(),
                 savedExpense.getAmount(),
-                savedExpense.getDate()
+                savedExpense.getDate(),
+                expense.getCategory()
         );
     }
 

@@ -19,5 +19,9 @@ public record ExpenseRequestDTO(
         BigDecimal amount,
 
         @NotNull(message = "Date is required")
-        LocalDate date
+        LocalDate date,
+
+        @Size(max = 30, message = "Category must have at most 30 characters")
+        @NotNull(message = "Category is required")
+        String category
 ) {}

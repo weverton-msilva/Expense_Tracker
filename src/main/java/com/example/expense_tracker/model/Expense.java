@@ -28,4 +28,7 @@ public class Expense {
 
     @Column(name = "DATE", nullable = false)
     private LocalDate date;
+
+    @Column(name = "CATEGORY", nullable = false)
+    private String category;
 }

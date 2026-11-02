@@ -2,7 +2,6 @@ package com.example.expense_tracker.controller;
 
 import com.example.expense_tracker.dto.ExpenseRequestDTO;
 import com.example.expense_tracker.dto.ExpenseResponseDTO;
-import com.example.expense_tracker.model.Expense;
 import com.example.expense_tracker.service.ExpenseService;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/expenses")
@@ -47,6 +45,14 @@ public class ExpenseController {
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 
         List<ExpenseResponseDTO> expenses = expenseService.findByDate(date);
+
+        return ResponseEntity.ok(expenses);
+    }
+
+    // Método para procurar despesa pela categoria
+    @GetMapping("/category/{category}")
+    public ResponseEntity<List<ExpenseResponseDTO>> getExpenseByCategory(String category) {
+        List<ExpenseResponseDTO> expenses = expenseService.findByCategory(category);
 
         return ResponseEntity.ok(expenses);
     }
