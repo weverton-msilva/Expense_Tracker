@@ -27,16 +27,16 @@ public class ExpenseController {
 
     // Método para listar todas as despesas
     @GetMapping
-    public ResponseEntity<List<Expense>> getAllExpenses() {
-        List<Expense> expenseList = expenseService.findAll();
+    public ResponseEntity<List<ExpenseResponseDTO>> getAllExpenses() {
+        List<ExpenseResponseDTO> expenseList = expenseService.findAll();
 
         return ResponseEntity.ok(expenseList);
     }
 
     // Método para procurar despesa por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Expense> getExpenseById(@PathVariable Long id) {
-        Optional<Expense> expense = expenseService.findById(id);
+    public ResponseEntity<ExpenseResponseDTO> getExpenseById(@PathVariable Long id) {
+        Optional<ExpenseResponseDTO> expense = expenseService.findById(id);
 
         return expense.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -44,10 +44,10 @@ public class ExpenseController {
 
     // Método para procurar despesa pela data
     @GetMapping("/date/{date}")
-    public ResponseEntity<List<Expense>> getExpenseByDate(
+    public ResponseEntity<List<ExpenseResponseDTO>> getExpenseByDate(
             @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
 
-        List<Expense> expenses = expenseService.findByDate(date);
+        List<ExpenseResponseDTO> expenses = expenseService.findByDate(date);
 
         return ResponseEntity.ok(expenses);
     }

@@ -21,18 +21,36 @@ public class ExpenseService {
     }
 
     // Listar todas as despesas
-    public List<Expense> findAll() {
-        return expenseRepository.findAll();
+    public List<ExpenseResponseDTO> findAll() {
+        return expenseRepository.findAll()
+                .stream().map(expense -> new ExpenseResponseDTO(
+                        expense.getId(),
+                        expense.getDescription(),
+                        expense.getAmount(),
+                        expense.getDate()
+                )).toList();
     }
 
     // Procurar despesa por ID
-    public Optional<Expense> findById(Long id) {
-        return expenseRepository.findById(id);
+    public Optional<ExpenseResponseDTO> findById(Long id) {
+        return expenseRepository.findById(id)
+                .map(expense -> new ExpenseResponseDTO(
+                        expense.getId(),
+                        expense.getDescription(),
+                        expense.getAmount(),
+                        expense.getDate()
+                ));
     }
 
     // Procurar despesa por data
-    public List<Expense> findByDate(LocalDate date) {
-        return expenseRepository.findByDate(date);
+    public List<ExpenseResponseDTO> findByDate(LocalDate date) {
+        return expenseRepository.findByDate(date)
+                .stream().map(expense -> new ExpenseResponseDTO(
+                        expense.getId(),
+                        expense.getDescription(),
+                        expense.getAmount(),
+                        expense.getDate()
+                )).toList();
     }
 
     // Guardar ou atualizar uma despesa
@@ -55,6 +73,11 @@ public class ExpenseService {
 
     // Apagar uma despesa por ID
     public void deleteById(Long id) {
+
+        if (!expenseRepository.existsById(id)) {
+            throw new RuntimeException("Expense not found");
+        }
+
         expenseRepository.deleteById(id);
     }
 }
