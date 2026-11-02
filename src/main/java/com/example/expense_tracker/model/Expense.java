@@ -25,15 +25,11 @@ public class Expense {
     private Long id;
 
     @Column(name = "DESCRIPTION", nullable = false, length = 100)
-    @NotBlank(message = "Description is required")
     private String description;
 
     @Column(name = "AMOUNT", nullable = false)
-    @NotNull(message = "Amount is required")
-    @DecimalMin(value = "0.01", message = "Amount must be greater than zero")
     private BigDecimal amount;
 
     @Column(name = "DATE", nullable = false)
-    @NotNull(message = "Date is required")
     private LocalDate date;
 }

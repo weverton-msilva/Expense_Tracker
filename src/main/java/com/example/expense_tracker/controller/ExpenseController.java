@@ -1,5 +1,7 @@
 package com.example.expense_tracker.controller;
 
+import com.example.expense_tracker.dto.ExpenseRequestDTO;
+import com.example.expense_tracker.dto.ExpenseResponseDTO;
 import com.example.expense_tracker.model.Expense;
 import com.example.expense_tracker.service.ExpenseService;
 import jakarta.validation.Valid;
@@ -52,8 +54,8 @@ public class ExpenseController {
 
     // Método para guardar ou criar uma despesa
     @PostMapping
-    public ResponseEntity<Expense> saveExpense(@Valid @RequestBody Expense expense) {
-        Expense savedExpense = expenseService.save(expense);
+    public ResponseEntity<ExpenseResponseDTO> saveExpense(@Valid @RequestBody ExpenseRequestDTO dto) {
+        ExpenseResponseDTO savedExpense = expenseService.save(dto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(savedExpense);
     }
