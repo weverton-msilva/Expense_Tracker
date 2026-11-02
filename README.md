@@ -10,7 +10,7 @@
 ## ✨ Funcionalidades
 
 - ❌ CRUD completo de gastos (REST)
-- ❌ Filtro por categoria, período e valor
+- ❌ Filtro por id, categoria, período e valor
 - ❌ Resumo de gastos agrupados por categoria
 - ❌ Total de gastos no mês atual
 - ❌ Paginação e ordenação nas listagens

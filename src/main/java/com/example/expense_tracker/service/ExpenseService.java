@@ -2,6 +2,7 @@ package com.example.expense_tracker.service;
 
 import com.example.expense_tracker.dto.ExpenseRequestDTO;
 import com.example.expense_tracker.dto.ExpenseResponseDTO;
+import com.example.expense_tracker.exception.ExpenseNotFoundException;
 import com.example.expense_tracker.model.Expense;
 import com.example.expense_tracker.repository.ExpenseRepository;
 import org.springframework.stereotype.Service;
@@ -30,16 +31,19 @@ public class ExpenseService {
                         expense.getDate()
                 )).toList();
     }
-
     // Procurar despesa por ID
-    public Optional<ExpenseResponseDTO> findById(Long id) {
-        return expenseRepository.findById(id)
-                .map(expense -> new ExpenseResponseDTO(
-                        expense.getId(),
-                        expense.getDescription(),
-                        expense.getAmount(),
-                        expense.getDate()
+    public ExpenseResponseDTO findById(Long id) {
+        Expense expense = expenseRepository.findById(id)
+                .orElseThrow(() -> new ExpenseNotFoundException(
+                        "Expense not found with id: " + id
                 ));
+
+        return new ExpenseResponseDTO(
+                expense.getId(),
+                expense.getDescription(),
+                expense.getAmount(),
+                expense.getDate()
+        );
     }
 
     // Procurar despesa por data
