@@ -36,10 +36,9 @@ public class ExpenseController {
     // Método para procurar despesa por ID
     @GetMapping("/{id}")
     public ResponseEntity<ExpenseResponseDTO> getExpenseById(@PathVariable Long id) {
-        Optional<ExpenseResponseDTO> expense = expenseService.findById(id);
+        ExpenseResponseDTO expense = expenseService.findById(id);
 
-        return expense.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(expense);
     }
 
     // Método para procurar despesa pela data
